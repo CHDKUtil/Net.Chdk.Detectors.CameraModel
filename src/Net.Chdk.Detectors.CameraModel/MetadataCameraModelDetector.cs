@@ -1,5 +1,4 @@
-﻿using Net.Chdk.Detectors.CameraModel.Core;
-using Net.Chdk.Model.CameraModel;
+﻿using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
 using Microsoft.Extensions.Logging;
 
