@@ -16,7 +16,7 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraModelProvider = cameraModelProvider;
         }
 
-        public CameraList GetCameraModels(string filePath)
+        public CameraModels GetCameraModels(string filePath)
         {
             var cameraInfo = FileCameraDetector.GetCamera(filePath);
             if (cameraInfo == null)
@@ -24,7 +24,7 @@ namespace Net.Chdk.Detectors.CameraModel
 
             var cameraModels = CameraModelProvider.GetCameraModels(cameraInfo);
 
-            return GetCameraList(cameraInfo, cameraModels);
+            return GetCameraModels(cameraInfo, cameraModels);
         }
     }
 }

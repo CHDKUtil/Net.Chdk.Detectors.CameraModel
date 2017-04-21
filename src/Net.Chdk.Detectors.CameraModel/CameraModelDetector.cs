@@ -25,7 +25,7 @@ namespace Net.Chdk.Detectors.CameraModel
             };
         }
 
-        public CameraList GetCameraModels(CardInfo cardInfo)
+        public CameraModels GetCameraModels(CardInfo cardInfo)
         {
             var cameraInfo = CameraDetector.GetCamera(cardInfo);
             if (cameraInfo == null)
@@ -33,7 +33,7 @@ namespace Net.Chdk.Detectors.CameraModel
 
             var cameraModels = GetCameraModels(cardInfo, cameraInfo);
 
-            return GetCameraList(cameraInfo, cameraModels);
+            return GetCameraModels(cameraInfo, cameraModels);
         }
 
         public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)

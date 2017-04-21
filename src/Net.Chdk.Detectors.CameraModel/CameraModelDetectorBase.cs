@@ -14,9 +14,9 @@ namespace Net.Chdk.Detectors.CameraModel
             LoggerFactory = loggerFactory;
         }
 
-        protected CameraList GetCameraList(CameraInfo cameraInfo, CameraModelInfo[] cameraModels)
+        protected CameraModels GetCameraModels(CameraInfo cameraInfo, CameraModelInfo[] cameraModels)
         {
-            return new CameraList
+            return new CameraModels
             {
                 Info = cameraInfo,
                 Models = SelectModels(cameraInfo, cameraModels)
