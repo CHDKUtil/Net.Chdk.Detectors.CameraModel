@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Net.Chdk.Detectors.Camera;
+using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
 using Net.Chdk.Providers.CameraModel;
@@ -8,25 +9,37 @@ using System.Linq;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public sealed class CameraModelDetector : ICameraModelDetector
+    public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector, ICameraModelDetectorEx
     {
-        private ILoggerFactory LoggerFactory { get; }
-        private IEnumerable<ICameraModelDetector> CameraModelDetectors { get; }
+        private ICameraDetector CameraDetector { get; }
+        private IEnumerable<ICameraModelDetectorEx> CameraModelDetectors { get; }
 
         public CameraModelDetector(ICameraDetector cameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
-            LoggerFactory = loggerFactory;
-            CameraModelDetectors = new ICameraModelDetector[]
+            CameraDetector = cameraDetector;
+            CameraModelDetectors = new ICameraModelDetectorEx[]
             {
                 new MetadataCameraModelDetector(LoggerFactory),
-                new FileSystemCameraModelDetector(cameraDetector, cameraModelProvider)
+                new FileSystemCameraModelDetector(cameraModelProvider)
             };
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo)
+        public CameraList GetCameraModels(CardInfo cardInfo)
+        {
+            var cameraInfo = CameraDetector.GetCamera(cardInfo);
+            if (cameraInfo == null)
+                return null;
+
+            var cameraModels = GetCameraModels(cardInfo, cameraInfo);
+
+            return GetCameraList(cameraInfo, cameraModels);
+        }
+
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
         {
             return CameraModelDetectors
-                .Select(d => d.GetCameraModels(cardInfo))
+                .Select(d => d.GetCameraModels(cardInfo, cameraInfo))
                 .FirstOrDefault(c => c != null);
         }
     }

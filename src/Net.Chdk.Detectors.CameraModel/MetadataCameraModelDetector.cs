@@ -1,17 +1,18 @@
-﻿using Net.Chdk.Model.CameraModel;
+﻿using Microsoft.Extensions.Logging;
+using Net.Chdk.Model.Camera;
+using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
-using Microsoft.Extensions.Logging;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    sealed class MetadataCameraModelDetector : MetadataDetector<MetadataCameraModelDetector, CameraModelInfo>, ICameraModelDetector
+    sealed class MetadataCameraModelDetector : MetadataDetector<MetadataCameraModelDetector, CameraModelInfo>, ICameraModelDetectorEx
     {
         public MetadataCameraModelDetector(ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
         {
             var modelInfo = GetValue(cardInfo);
             return modelInfo != null

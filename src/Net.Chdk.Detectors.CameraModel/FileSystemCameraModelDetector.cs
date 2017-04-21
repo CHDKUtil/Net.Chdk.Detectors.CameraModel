@@ -1,26 +1,21 @@
-﻿using Net.Chdk.Detectors.Camera;
+﻿using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
 using Net.Chdk.Providers.CameraModel;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    sealed class FileSystemCameraModelDetector : ICameraModelDetector
+    sealed class FileSystemCameraModelDetector : ICameraModelDetectorEx
     {
-        private ICameraDetector CameraDetector { get; }
         private ICameraModelProvider CameraModelProvider { get; }
 
-        public FileSystemCameraModelDetector(ICameraDetector cameraDetector, ICameraModelProvider cameraModelProvider)
+        public FileSystemCameraModelDetector(ICameraModelProvider cameraModelProvider)
         {
-            CameraDetector = cameraDetector;
             CameraModelProvider = cameraModelProvider;
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
         {
-            var cameraInfo = CameraDetector.GetCamera(cardInfo);
-            if (cameraInfo == null)
-                return null;
             return CameraModelProvider.GetCameraModels(cameraInfo);
         }
     }

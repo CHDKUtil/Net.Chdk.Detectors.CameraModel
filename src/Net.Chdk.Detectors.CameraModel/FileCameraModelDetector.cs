@@ -1,26 +1,30 @@
-﻿using Net.Chdk.Detectors.Camera;
-using Net.Chdk.Model.CameraModel;
+﻿using Microsoft.Extensions.Logging;
+using Net.Chdk.Detectors.Camera;
 using Net.Chdk.Providers.CameraModel;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public sealed class FileCameraModelDetector : IFileCameraModelDetector
+    public sealed class FileCameraModelDetector : CameraModelDetectorBase, IFileCameraModelDetector
     {
         private IFileCameraDetector FileCameraDetector { get; }
         private ICameraModelProvider CameraModelProvider { get; }
 
-        public FileCameraModelDetector(IFileCameraDetector fileCameraDetector, ICameraModelProvider cameraModelProvider)
+        public FileCameraModelDetector(IFileCameraDetector fileCameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
             FileCameraDetector = fileCameraDetector;
             CameraModelProvider = cameraModelProvider;
         }
 
-        public CameraModelInfo[] GetCameraModels(string filePath)
+        public CameraList GetCameraModels(string filePath)
         {
             var cameraInfo = FileCameraDetector.GetCamera(filePath);
             if (cameraInfo == null)
                 return null;
-            return CameraModelProvider.GetCameraModels(cameraInfo);
+
+            var cameraModels = CameraModelProvider.GetCameraModels(cameraInfo);
+
+            return GetCameraList(cameraInfo, cameraModels);
         }
     }
 }
