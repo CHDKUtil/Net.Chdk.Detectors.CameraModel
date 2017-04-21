@@ -54,10 +54,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraModelDetector.cs" />
+    <Compile Include="FileSystemCameraModelDetector.cs" />
     <Compile Include="MetadataCameraModelDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Camera.Core\src\Net.Chdk.Detectors.Camera.Core\Net.Chdk.Detectors.Camera.Core.csproj">
+      <Project>{8F4788BC-A82F-4E50-A9AF-E25F4AC183A1}</Project>
+      <Name>Net.Chdk.Detectors.Camera.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Detectors.CameraModel.Core\src\Net.Chdk.Detectors.CameraModel.Core\Net.Chdk.Detectors.CameraModel.Core.csproj">
       <Project>{3B10662E-DFD4-48C8-8245-A135504FCB25}</Project>
       <Name>Net.Chdk.Detectors.CameraModel.Core</Name>
@@ -70,9 +75,17 @@
       <Project>{34f5942a-de8d-4db2-b7d4-2bb77cddff3d}</Project>
       <Name>Net.Chdk.Model.CameraModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Net.Chdk.Model.Camera\src\Net.Chdk.Model.Camera\Net.Chdk.Model.Camera.csproj">
+      <Project>{66B0906B-FF63-4CFC-8EA7-A472333AECB1}</Project>
+      <Name>Net.Chdk.Model.Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Model.Card\src\Net.Chdk.Model.Card\Net.Chdk.Model.Card.csproj">
       <Project>{a41d61fe-2fb8-4892-ac7d-ecee7e61c637}</Project>
       <Name>Net.Chdk.Model.Card</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Net.Chdk.Providers.CameraModel.Core\src\Net.Chdk.Providers.CameraModel.Core\Net.Chdk.Providers.CameraModel.Core.csproj">
+      <Project>{96B62F8E-2901-42C7-9F3E-09F61AB1A40C}</Project>
+      <Name>Net.Chdk.Providers.CameraModel.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

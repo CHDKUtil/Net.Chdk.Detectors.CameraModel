@@ -11,9 +11,9 @@ namespace Net.Chdk.Detectors.CameraModel
         {
         }
 
-        public CameraModelInfo GetCameraModel(CardInfo cardInfo)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo)
         {
-            return GetValue(cardInfo);
+            return new[] { GetValue(cardInfo) };
         }
 
         protected override string FileName => "MODEL.JSN";
