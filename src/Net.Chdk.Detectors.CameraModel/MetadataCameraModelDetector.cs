@@ -14,6 +14,8 @@ namespace Net.Chdk.Detectors.CameraModel
 
         public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
         {
+            Logger.LogTrace("Detecting camera models from {0} metadata", cardInfo.DriveLetter);
+
             var modelInfo = GetValue(cardInfo);
             return modelInfo != null
                 ? new[] { modelInfo }

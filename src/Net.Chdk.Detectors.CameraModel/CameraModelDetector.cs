@@ -10,18 +10,21 @@ namespace Net.Chdk.Detectors.CameraModel
 {
     public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector
     {
+        private ILogger Logger { get; }
         private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
         private ICameraDetector CameraDetector { get; }
 
         public CameraModelDetector(IEnumerable<IInnerCameraModelDetector> cameraModelDetectors, ICameraDetector cameraDetector, ILoggerFactory loggerFactory)
-            : base(loggerFactory)
         {
+            Logger = loggerFactory.CreateLogger<CameraModelDetector>();
             CameraModelDetectors = cameraModelDetectors;
             CameraDetector = cameraDetector;
         }
 
         public CameraModels GetCameraModels(CardInfo cardInfo)
         {
+            Logger.LogTrace("Detecting camera models from {0}", cardInfo.DriveLetter);
+
             var cameraInfo = CameraDetector.GetCamera(cardInfo);
             if (cameraInfo == null)
                 return null;

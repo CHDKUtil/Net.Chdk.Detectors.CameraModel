@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Net.Chdk.Model.Camera;
+﻿using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using System;
 
@@ -7,13 +6,6 @@ namespace Net.Chdk.Detectors.CameraModel
 {
     public abstract class CameraModelDetectorBase
     {
-        protected ILoggerFactory LoggerFactory { get; }
-
-        protected CameraModelDetectorBase(ILoggerFactory loggerFactory)
-        {
-            LoggerFactory = loggerFactory;
-        }
-
         protected CameraModels GetCameraModels(CameraInfo cameraInfo, CameraModelInfo[] cameraModels)
         {
             return new CameraModels

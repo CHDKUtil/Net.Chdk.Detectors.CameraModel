@@ -6,18 +6,21 @@ namespace Net.Chdk.Detectors.CameraModel
 {
     public sealed class FileCameraModelDetector : CameraModelDetectorBase, IFileCameraModelDetector
     {
+        private ILogger Logger { get; }
         private IFileCameraDetector FileCameraDetector { get; }
         private ICameraModelProvider CameraModelProvider { get; }
 
         public FileCameraModelDetector(IFileCameraDetector fileCameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
-            : base(loggerFactory)
         {
+            Logger = loggerFactory.CreateLogger<FileCameraModelDetector>();
             FileCameraDetector = fileCameraDetector;
             CameraModelProvider = cameraModelProvider;
         }
 
         public CameraModels GetCameraModels(string filePath)
         {
+            Logger.LogTrace("Detecting camera models from {0}", filePath);
+
             var cameraInfo = FileCameraDetector.GetCamera(filePath);
             if (cameraInfo == null)
                 return null;
