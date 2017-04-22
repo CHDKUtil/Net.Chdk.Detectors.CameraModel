@@ -5,7 +5,7 @@ using Net.Chdk.Model.Card;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    sealed class MetadataCameraModelDetector : MetadataDetector<MetadataCameraModelDetector, CameraModelInfo>, ICameraModelDetectorEx
+    sealed class MetadataCameraModelDetector : MetadataDetector<MetadataCameraModelDetector, CameraModelInfo>, IInnerCameraModelDetector
     {
         public MetadataCameraModelDetector(ILoggerFactory loggerFactory)
             : base(loggerFactory)

@@ -9,16 +9,16 @@ using System.Linq;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector, ICameraModelDetectorEx
+    public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector
     {
         private ICameraDetector CameraDetector { get; }
-        private IEnumerable<ICameraModelDetectorEx> CameraModelDetectors { get; }
+        private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
 
         public CameraModelDetector(ICameraDetector cameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
             CameraDetector = cameraDetector;
-            CameraModelDetectors = new ICameraModelDetectorEx[]
+            CameraModelDetectors = new IInnerCameraModelDetector[]
             {
                 new MetadataCameraModelDetector(LoggerFactory),
                 new FileSystemCameraModelDetector(cameraModelProvider)
@@ -36,7 +36,7 @@ namespace Net.Chdk.Detectors.CameraModel
             return GetCameraModels(cameraInfo, cameraModels);
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
+        private CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
         {
             return CameraModelDetectors
                 .Select(d => d.GetCameraModels(cardInfo, cameraInfo))

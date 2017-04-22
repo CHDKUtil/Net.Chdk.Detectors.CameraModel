@@ -5,7 +5,7 @@ using Net.Chdk.Providers.CameraModel;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    sealed class FileSystemCameraModelDetector : ICameraModelDetectorEx
+    sealed class FileSystemCameraModelDetector : IInnerCameraModelDetector
     {
         private ICameraModelProvider CameraModelProvider { get; }
 
