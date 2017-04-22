@@ -3,7 +3,6 @@ using Net.Chdk.Detectors.Camera;
 using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
-using Net.Chdk.Providers.CameraModel;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,18 +10,14 @@ namespace Net.Chdk.Detectors.CameraModel
 {
     public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector
     {
-        private ICameraDetector CameraDetector { get; }
         private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
+        private ICameraDetector CameraDetector { get; }
 
-        public CameraModelDetector(ICameraDetector cameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
+        public CameraModelDetector(IEnumerable<IInnerCameraModelDetector> cameraModelDetectors, ICameraDetector cameraDetector, ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
+            CameraModelDetectors = cameraModelDetectors;
             CameraDetector = cameraDetector;
-            CameraModelDetectors = new IInnerCameraModelDetector[]
-            {
-                new MetadataCameraModelDetector(LoggerFactory),
-                new FileSystemCameraModelDetector(cameraModelProvider)
-            };
         }
 
         public CameraModels GetCameraModels(CardInfo cardInfo)
