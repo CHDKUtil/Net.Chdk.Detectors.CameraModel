@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraModelDetector.cs" />
-    <Compile Include="CameraModelDetectorBase.cs" />
+    <Compile Include="CameraModelInfosExtensions.cs" />
     <Compile Include="FileCameraModelDetector.cs" />
     <Compile Include="FileSystemCameraModelDetector.cs" />
     <Compile Include="IInnerCameraModelDetector.cs" />

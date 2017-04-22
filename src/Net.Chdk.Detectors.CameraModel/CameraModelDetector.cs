@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public sealed class CameraModelDetector : CameraModelDetectorBase, ICameraModelDetector
+    public sealed class CameraModelDetector : ICameraModelDetector
     {
         private ILogger Logger { get; }
         private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
@@ -31,7 +31,11 @@ namespace Net.Chdk.Detectors.CameraModel
 
             var cameraModels = GetCameraModels(cardInfo, cameraInfo);
 
-            return GetCameraModels(cameraInfo, cameraModels);
+            return new CameraModels
+            {
+                Info = cameraInfo,
+                Models = cameraModels.Collapse(cameraInfo)
+            };
         }
 
         private CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)

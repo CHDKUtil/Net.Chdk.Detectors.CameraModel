@@ -4,7 +4,7 @@ using Net.Chdk.Providers.CameraModel;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public sealed class FileCameraModelDetector : CameraModelDetectorBase, IFileCameraModelDetector
+    public sealed class FileCameraModelDetector : IFileCameraModelDetector
     {
         private ILogger Logger { get; }
         private IFileCameraDetector FileCameraDetector { get; }
@@ -27,7 +27,11 @@ namespace Net.Chdk.Detectors.CameraModel
 
             var cameraModels = CameraModelProvider.GetCameraModels(cameraInfo);
 
-            return GetCameraModels(cameraInfo, cameraModels);
+            return new CameraModels
+            {
+                Info = cameraInfo,
+                Models = cameraModels.Collapse(cameraInfo)
+            };
         }
     }
 }

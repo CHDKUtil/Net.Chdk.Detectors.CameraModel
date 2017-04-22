@@ -4,18 +4,9 @@ using System;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
-    public abstract class CameraModelDetectorBase
+    static class CameraModelInfosExtensions
     {
-        protected CameraModels GetCameraModels(CameraInfo cameraInfo, CameraModelInfo[] cameraModels)
-        {
-            return new CameraModels
-            {
-                Info = cameraInfo,
-                Models = SelectModels(cameraInfo, cameraModels)
-            };
-        }
-
-        private CameraModelInfo[] SelectModels(CameraInfo cameraInfo, CameraModelInfo[] cameraModels)
+        public static CameraModelInfo[] Collapse(this CameraModelInfo[] cameraModels, CameraInfo cameraInfo)
         {
             // IXUS 132/135
             if (cameraModels?.Length > 1 && cameraModels[0].Names.Length > 1)
