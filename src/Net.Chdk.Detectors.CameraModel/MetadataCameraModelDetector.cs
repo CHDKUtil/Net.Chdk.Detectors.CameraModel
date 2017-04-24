@@ -18,25 +18,24 @@ namespace Net.Chdk.Detectors.CameraModel
         {
             Logger.LogTrace("Detecting camera models from {0} metadata", cardInfo.DriveLetter);
 
-            var modelInfo = GetValue(cardInfo);
-            if (modelInfo == null)
+            var cameraModel = GetValue(cardInfo);
+            if (cameraModel == null)
                 return null;
 
-            if (!ValidateVersion(modelInfo))
+            if (!Validate(cameraModel.Version))
                 return null;
 
-            if (!ValidateNames(modelInfo))
+            if (!Validate(cameraModel.Names))
                 return null;
 
-            return new[] { modelInfo };
+            return new[] { cameraModel };
         }
 
         protected override string FileName => "MODEL.JSN";
 
-        private static bool ValidateVersion(CameraModelInfo modelInfo)
+        private static bool Validate(Version version)
         {
-            Version version;
-            if (!Version.TryParse(modelInfo.Version, out version))
+            if (version == null)
                 return false;
 
             if (version.Major < 1 || version.Minor < 0)
@@ -45,15 +44,15 @@ namespace Net.Chdk.Detectors.CameraModel
             return true;
         }
 
-        private static bool ValidateNames(CameraModelInfo modelInfo)
+        private static bool Validate(string[] names)
         {
-            if (modelInfo.Names == null)
+            if (names == null)
                 return false;
 
-            if (modelInfo.Names.Length == 0)
+            if (names.Length == 0)
                 return false;
 
-            if (modelInfo.Names.Any(string.IsNullOrEmpty))
+            if (names.Any(string.IsNullOrEmpty))
                 return false;
 
             return true;
