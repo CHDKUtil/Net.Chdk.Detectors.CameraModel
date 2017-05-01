@@ -94,6 +94,10 @@
       <Project>{96B62F8E-2901-42C7-9F3E-09F61AB1A40C}</Project>
       <Name>Net.Chdk.Providers.CameraModel.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Net.Chdk.Validators.Core\src\Net.Chdk.Validators.Core\Net.Chdk.Validators.Core.csproj">
+      <Project>{850646A6-01CE-48D5-9868-0D1CFC4F48D5}</Project>
+      <Name>Net.Chdk.Validators.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
