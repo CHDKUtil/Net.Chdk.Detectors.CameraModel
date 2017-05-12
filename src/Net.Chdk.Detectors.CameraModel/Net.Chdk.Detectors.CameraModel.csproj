@@ -66,6 +66,10 @@
     <Compile Include="ServiceCollectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Net.Chdk.Core\src\Net.Chdk.Core\Net.Chdk.Core.csproj">
+      <Project>{6c183a9c-30c1-47e5-9016-48890ec8aba2}</Project>
+      <Name>Net.Chdk.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Camera.Core\src\Net.Chdk.Detectors.Camera.Core\Net.Chdk.Detectors.Camera.Core.csproj">
       <Project>{8F4788BC-A82F-4E50-A9AF-E25F4AC183A1}</Project>
       <Name>Net.Chdk.Detectors.Camera.Core</Name>

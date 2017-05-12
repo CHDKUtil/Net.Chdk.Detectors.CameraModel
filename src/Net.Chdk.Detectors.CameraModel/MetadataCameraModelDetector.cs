@@ -24,6 +24,6 @@ namespace Net.Chdk.Detectors.CameraModel
             return new[] { cameraModel };
         }
 
-        protected override string FileName => "MODEL.JSN";
+        protected override string FileName => Files.Metadata.CameraModel;
     }
 }
