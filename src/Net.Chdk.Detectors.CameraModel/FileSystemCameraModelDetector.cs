@@ -2,6 +2,7 @@
 using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
+using Net.Chdk.Model.Software;
 using Net.Chdk.Providers.CameraModel;
 
 namespace Net.Chdk.Detectors.CameraModel
@@ -17,7 +18,7 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraModelProvider = cameraModelProvider;
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, CameraInfo cameraInfo)
         {
             Logger.LogTrace("Detecting camera models from camera info");
 

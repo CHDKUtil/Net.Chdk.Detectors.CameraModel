@@ -3,6 +3,7 @@ using Net.Chdk.Detectors.Camera;
 using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
+using Net.Chdk.Model.Software;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,15 +22,15 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraDetector = cameraDetector;
         }
 
-        public CameraModels GetCameraModels(CardInfo cardInfo)
+        public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo)
         {
             Logger.LogTrace("Detecting camera models from {0}", cardInfo.DriveLetter);
 
-            var cameraInfo = CameraDetector.GetCamera(cardInfo);
+            var cameraInfo = CameraDetector.GetCamera(cardInfo, softwareInfo);
             if (cameraInfo == null)
                 return null;
 
-            var cameraModels = GetCameraModels(cardInfo, cameraInfo);
+            var cameraModels = GetCameraModels(cardInfo, softwareInfo, cameraInfo);
 
             return new CameraModels
             {
@@ -38,10 +39,10 @@ namespace Net.Chdk.Detectors.CameraModel
             };
         }
 
-        private CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
+        private CameraModelInfo[] GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, CameraInfo cameraInfo)
         {
             return CameraModelDetectors
-                .Select(d => d.GetCameraModels(cardInfo, cameraInfo))
+                .Select(d => d.GetCameraModels(cardInfo, softwareInfo, cameraInfo))
                 .FirstOrDefault(c => c != null);
         }
     }

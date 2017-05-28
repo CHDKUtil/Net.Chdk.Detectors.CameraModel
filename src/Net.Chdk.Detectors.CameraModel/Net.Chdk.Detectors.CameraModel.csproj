@@ -114,6 +114,10 @@
       <Project>{a41d61fe-2fb8-4892-ac7d-ecee7e61c637}</Project>
       <Name>Net.Chdk.Model.Card</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Net.Chdk.Model.Software\src\Net.Chdk.Model.Software\Net.Chdk.Model.Software.csproj">
+      <Project>{7f492ad5-c9e5-4e13-9587-d0b88ba8d209}</Project>
+      <Name>Net.Chdk.Model.Software</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Providers.CameraModel.Core\src\Net.Chdk.Providers.CameraModel.Core\Net.Chdk.Providers.CameraModel.Core.csproj">
       <Project>{96B62F8E-2901-42C7-9F3E-09F61AB1A40C}</Project>
       <Name>Net.Chdk.Providers.CameraModel.Core</Name>
