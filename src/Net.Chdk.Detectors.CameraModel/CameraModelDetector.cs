@@ -12,12 +12,14 @@ namespace Net.Chdk.Detectors.CameraModel
     public sealed class CameraModelDetector : ICameraModelDetector
     {
         private ILogger Logger { get; }
+        private IEnumerable<IProductCameraModelDetector> ProductCameraModelDetectors { get; }
         private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
         private ICameraDetector CameraDetector { get; }
 
-        public CameraModelDetector(IEnumerable<IInnerCameraModelDetector> cameraModelDetectors, ICameraDetector cameraDetector, ILoggerFactory loggerFactory)
+        public CameraModelDetector(IEnumerable<IProductCameraModelDetector> productCameraModelDetectors, IEnumerable<IInnerCameraModelDetector> cameraModelDetectors, ICameraDetector cameraDetector, ILoggerFactory loggerFactory)
         {
             Logger = loggerFactory.CreateLogger<CameraModelDetector>();
+            ProductCameraModelDetectors = productCameraModelDetectors;
             CameraModelDetectors = cameraModelDetectors;
             CameraDetector = cameraDetector;
         }
@@ -25,6 +27,10 @@ namespace Net.Chdk.Detectors.CameraModel
         public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo)
         {
             Logger.LogTrace("Detecting camera models from {0}", cardInfo.DriveLetter);
+
+            var models = GetCameraModels(softwareInfo);
+            if (models != null)
+                return models;
 
             var cameraInfo = CameraDetector.GetCamera(cardInfo, softwareInfo);
             if (cameraInfo == null)
@@ -37,6 +43,13 @@ namespace Net.Chdk.Detectors.CameraModel
                 Info = cameraInfo,
                 Models = cameraModels.Collapse(cameraInfo)
             };
+        }
+
+        private CameraModels GetCameraModels(SoftwareInfo softwareInfo)
+        {
+            return ProductCameraModelDetectors
+                .Select(d => d.GetCameraModels(softwareInfo))
+                .FirstOrDefault(c => c != null);
         }
 
         private CameraModelInfo[] GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, CameraInfo cameraInfo)
