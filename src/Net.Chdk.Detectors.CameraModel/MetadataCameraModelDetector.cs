@@ -3,9 +3,11 @@ using Net.Chdk.Model.Camera;
 using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
 using Net.Chdk.Validators;
+using System;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
+    [Obsolete]
     sealed class MetadataCameraModelDetector : MetadataDetector<MetadataCameraModelDetector, CameraModelInfo>, IInnerCameraModelDetector
     {
         public MetadataCameraModelDetector(IValidator<CameraModelInfo> validator, ILoggerFactory loggerFactory)
