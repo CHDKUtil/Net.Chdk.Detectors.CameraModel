@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Net.Chdk.Detectors.Camera;
-using Net.Chdk.Model.Card;
+﻿using Net.Chdk.Model.Card;
 using Net.Chdk.Model.Software;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +7,17 @@ namespace Net.Chdk.Detectors.CameraModel
 {
     public sealed class CameraModelDetector : ICameraModelDetector
     {
-        private ILogger Logger { get; }
-        private IEnumerable<IProductCameraModelDetector> ProductCameraModelDetectors { get; }
-        private IEnumerable<IInnerCameraModelDetector> CameraModelDetectors { get; }
-        private ICameraDetector CameraDetector { get; }
+        private IEnumerable<IOuterCameraModelDetector> CameraModelDetectors { get; }
 
-        public CameraModelDetector(IEnumerable<IProductCameraModelDetector> productCameraModelDetectors, IEnumerable<IInnerCameraModelDetector> cameraModelDetectors, ICameraDetector cameraDetector, ILoggerFactory loggerFactory)
+        public CameraModelDetector(IEnumerable<IOuterCameraModelDetector> cameraModelDetectors)
         {
-            Logger = loggerFactory.CreateLogger<CameraModelDetector>();
-            ProductCameraModelDetectors = productCameraModelDetectors;
             CameraModelDetectors = cameraModelDetectors;
-            CameraDetector = cameraDetector;
         }
 
         public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo)
         {
-            Logger.LogTrace("Detecting camera models from {0}", cardInfo.DriveLetter);
-
-            var models = GetCameraModels(softwareInfo);
-            if (models != null)
-                return models;
-
-            var cameraInfo = CameraDetector.GetCamera(cardInfo);
-            if (cameraInfo == null)
-                return null;
-
-            var cameraModels = CameraModelDetectors
-                .Select(d => d.GetCameraModels(cardInfo, cameraInfo))
-                .FirstOrDefault(c => c != null);
-
-            return new CameraModels
-            {
-                Info = cameraInfo,
-                Models = cameraModels.Collapse(cameraInfo)
-            };
-        }
-
-        private CameraModels GetCameraModels(SoftwareInfo softwareInfo)
-        {
-            return ProductCameraModelDetectors
-                .Select(d => d.GetCameraModels(softwareInfo))
+            return CameraModelDetectors
+                .Select(d => d.GetCameraModels(cardInfo, softwareInfo))
                 .FirstOrDefault(c => c != null);
         }
     }

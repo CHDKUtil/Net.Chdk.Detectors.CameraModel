@@ -8,7 +8,9 @@ namespace Net.Chdk.Detectors.CameraModel
         public static IServiceCollection AddCameraModelDetector(this IServiceCollection serviceCollection)
         {
             return serviceCollection
-                .AddSingleton<ICameraModelDetector, CameraModelDetector>();
+                .AddSingleton<ICameraModelDetector, CameraModelDetector>()
+                .AddSingleton<IOuterCameraModelDetector, SoftwareCameraModelDetector>()
+                .AddSingleton<IOuterCameraModelDetector, DerivedCameraModelDetector>();
         }
 
         [Obsolete]
