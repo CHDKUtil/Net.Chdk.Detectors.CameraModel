@@ -15,11 +15,11 @@ namespace Net.Chdk.Detectors.CameraModel
         {
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo, IProgress<double> progress)
         {
             Logger.LogTrace("Detecting camera models from {0} metadata", cardInfo.DriveLetter);
 
-            var cameraModel = GetValue(cardInfo);
+            var cameraModel = GetValue(cardInfo, progress);
             if (cameraModel == null)
                 return null;
 

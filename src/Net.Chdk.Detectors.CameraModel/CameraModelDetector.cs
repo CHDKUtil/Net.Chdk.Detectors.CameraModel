@@ -1,5 +1,6 @@
 ﻿using Net.Chdk.Model.Card;
 using Net.Chdk.Model.Software;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +15,10 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraModelDetectors = cameraModelDetectors;
         }
 
-        public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo)
+        public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, IProgress<double> progress)
         {
             return CameraModelDetectors
-                .Select(d => d.GetCameraModels(cardInfo, softwareInfo))
+                .Select(d => d.GetCameraModels(cardInfo, softwareInfo, progress))
                 .FirstOrDefault(c => c != null);
         }
     }
