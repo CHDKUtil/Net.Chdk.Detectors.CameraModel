@@ -2,6 +2,7 @@
 using Net.Chdk.Detectors.Camera;
 using Net.Chdk.Providers.CameraModel;
 using System;
+using System.Threading;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
@@ -18,7 +19,7 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraModelProvider = cameraModelProvider;
         }
 
-        public CameraModels GetCameraModels(string filePath, IProgress<double> progress)
+        public CameraModels GetCameraModels(string filePath, IProgress<double> progress, CancellationToken token)
         {
             Logger.LogTrace("Detecting camera models from {0}", filePath);
 

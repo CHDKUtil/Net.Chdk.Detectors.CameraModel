@@ -4,6 +4,7 @@ using Net.Chdk.Model.CameraModel;
 using Net.Chdk.Model.Card;
 using Net.Chdk.Validators;
 using System;
+using System.Threading;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
@@ -15,11 +16,11 @@ namespace Net.Chdk.Detectors.CameraModel
         {
         }
 
-        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo, IProgress<double> progress)
+        public CameraModelInfo[] GetCameraModels(CardInfo cardInfo, CameraInfo cameraInfo, IProgress<double> progress, CancellationToken token)
         {
             Logger.LogTrace("Detecting camera models from {0} metadata", cardInfo.DriveLetter);
 
-            var cameraModel = GetValue(cardInfo, progress);
+            var cameraModel = GetValue(cardInfo, progress, token);
             if (cameraModel == null)
                 return null;
 

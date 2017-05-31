@@ -5,6 +5,7 @@ using Net.Chdk.Model.Software;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Net.Chdk.Detectors.CameraModel
 {
@@ -21,16 +22,16 @@ namespace Net.Chdk.Detectors.CameraModel
             CameraDetector = cameraDetector;
         }
 
-        public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, IProgress<double> progress)
+        public CameraModels GetCameraModels(CardInfo cardInfo, SoftwareInfo softwareInfo, IProgress<double> progress, CancellationToken token)
         {
             Logger.LogTrace("Detecting camera models from {0}", cardInfo.DriveLetter);
 
-            var cameraInfo = CameraDetector.GetCamera(cardInfo, progress);
+            var cameraInfo = CameraDetector.GetCamera(cardInfo, progress, token);
             if (cameraInfo == null)
                 return null;
 
             var cameraModels = CameraModelDetectors
-                .Select(d => d.GetCameraModels(cardInfo, cameraInfo, progress))
+                .Select(d => d.GetCameraModels(cardInfo, cameraInfo, progress, token))
                 .FirstOrDefault(c => c != null);
 
             return new CameraModels
