@@ -23,7 +23,11 @@ namespace Net.Chdk.Detectors.CameraModel
         {
             Logger.LogTrace("Detecting camera models from camera info");
 
-            return CameraModelProvider.GetCameraModels(cameraInfo);
+            var models = CameraModelProvider.GetCameraModels(cameraInfo);
+            if (models == null)
+                return null;
+
+            return models.Models;
         }
     }
 }
