@@ -32,7 +32,7 @@ namespace Net.Chdk.Detectors.CameraModel
             return new CameraModels
             {
                 Info = cameraInfo,
-                Models = cameraModels.Models.Collapse(cameraInfo)
+                Models = cameraModels?.Models.Collapse(cameraInfo)
             };
         }
     }
