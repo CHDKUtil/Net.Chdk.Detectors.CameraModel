@@ -58,6 +58,30 @@
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.1.1.2\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Net.Chdk.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Core.0.2.0-alpha\lib\netstandard1.0\Net.Chdk.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Json, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Json.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Model.Camera, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Model.Camera.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Model.Camera.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Model.CameraModel, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Model.CameraModel.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Model.CameraModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Model.Card, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Model.Card.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Model.Card.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Model.Category, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Model.Category.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Model.Category.dll</HintPath>
+    </Reference>
+    <Reference Include="Net.Chdk.Model.Software, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Net.Chdk.Model.Software.0.1.0-alpha\lib\netstandard1.0\Net.Chdk.Model.Software.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -88,10 +112,6 @@
     <Compile Include="SoftwareCameraModelDetector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Net.Chdk.Core\src\Net.Chdk.Core\Net.Chdk.Core.csproj">
-      <Project>{6c183a9c-30c1-47e5-9016-48890ec8aba2}</Project>
-      <Name>Net.Chdk.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Camera.Core\src\Net.Chdk.Detectors.Camera.Core\Net.Chdk.Detectors.Camera.Core.csproj">
       <Project>{8F4788BC-A82F-4E50-A9AF-E25F4AC183A1}</Project>
       <Name>Net.Chdk.Detectors.Camera.Core</Name>
@@ -103,22 +123,6 @@
     <ProjectReference Include="..\..\..\Net.Chdk.Detectors.Core\src\Net.Chdk.Detectors.Core\Net.Chdk.Detectors.Core.csproj">
       <Project>{b5899f00-8bd7-4776-a677-86177a796146}</Project>
       <Name>Net.Chdk.Detectors.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Net.Chdk.Model.CameraModel\src\Net.Chdk.Model.CameraModel\Net.Chdk.Model.CameraModel.csproj">
-      <Project>{34f5942a-de8d-4db2-b7d4-2bb77cddff3d}</Project>
-      <Name>Net.Chdk.Model.CameraModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Net.Chdk.Model.Camera\src\Net.Chdk.Model.Camera\Net.Chdk.Model.Camera.csproj">
-      <Project>{66B0906B-FF63-4CFC-8EA7-A472333AECB1}</Project>
-      <Name>Net.Chdk.Model.Camera</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Net.Chdk.Model.Card\src\Net.Chdk.Model.Card\Net.Chdk.Model.Card.csproj">
-      <Project>{a41d61fe-2fb8-4892-ac7d-ecee7e61c637}</Project>
-      <Name>Net.Chdk.Model.Card</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Net.Chdk.Model.Software\src\Net.Chdk.Model.Software\Net.Chdk.Model.Software.csproj">
-      <Project>{7f492ad5-c9e5-4e13-9587-d0b88ba8d209}</Project>
-      <Name>Net.Chdk.Model.Software</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Net.Chdk.Providers.CameraModel.Core\src\Net.Chdk.Providers.CameraModel.Core\Net.Chdk.Providers.CameraModel.Core.csproj">
       <Project>{96B62F8E-2901-42C7-9F3E-09F61AB1A40C}</Project>
