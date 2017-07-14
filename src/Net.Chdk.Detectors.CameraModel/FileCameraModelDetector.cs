@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Net.Chdk.Detectors.Camera;
-using Net.Chdk.Providers.CameraModel;
+using Net.Chdk.Providers.Camera;
 using System;
 using System.Threading;
 
@@ -10,13 +10,13 @@ namespace Net.Chdk.Detectors.CameraModel
     {
         private ILogger Logger { get; }
         private IFileCameraDetector FileCameraDetector { get; }
-        private ICameraModelProvider CameraModelProvider { get; }
+        private ICameraProvider CameraProvider { get; }
 
-        public FileCameraModelDetector(IFileCameraDetector fileCameraDetector, ICameraModelProvider cameraModelProvider, ILoggerFactory loggerFactory)
+        public FileCameraModelDetector(IFileCameraDetector fileCameraDetector, ICameraProvider cameraProvider, ILoggerFactory loggerFactory)
         {
             Logger = loggerFactory.CreateLogger<FileCameraModelDetector>();
             FileCameraDetector = fileCameraDetector;
-            CameraModelProvider = cameraModelProvider;
+            CameraProvider = cameraProvider;
         }
 
         public CameraModels GetCameraModels(string filePath, IProgress<double> progress, CancellationToken token)
@@ -27,7 +27,7 @@ namespace Net.Chdk.Detectors.CameraModel
             if (cameraInfo == null)
                 return null;
 
-            var cameraModels = CameraModelProvider.GetCameraModels(cameraInfo);
+            var cameraModels = CameraProvider.GetCameraModels(cameraInfo);
 
             return new CameraModels
             {
