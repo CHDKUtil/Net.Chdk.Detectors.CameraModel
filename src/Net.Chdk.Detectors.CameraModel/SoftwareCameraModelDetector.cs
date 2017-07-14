@@ -33,8 +33,6 @@ namespace Net.Chdk.Detectors.CameraModel
             {
                 Info = modelsInfo.Info,
                 Models = modelsInfo.Models,
-                AltButton = modelsInfo.AltButton,
-                AltButtons = modelsInfo.AltButtons,
             };
         }
     }
