@@ -16,7 +16,7 @@ namespace Net.Chdk.Detectors.CameraModel
                     var model = cameraModels[i];
                     foreach (var name in model.Names)
                     {
-                        if (name.Equals(cameraInfo.Base.Model, StringComparison.InvariantCultureIgnoreCase))
+                        if (name.Equals(cameraInfo.Base.Model, StringComparison.OrdinalIgnoreCase))
                         {
                             return new[] { cameraModels[i] };
                         }
